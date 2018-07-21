@@ -1,9 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { TextField } from 'react-native-material-textfield';
 
-import Tag from "./Tag";
-import styles from "./styles";
+import Tag from './Tag';
+import styles from './styles';
 
 class Tags extends React.Component {
   constructor(props) {
@@ -11,29 +12,26 @@ class Tags extends React.Component {
 
     this.state = {
       tags: props.initialTags,
-      text: props.initialText
+      text: props.initialText,
     };
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (
-      nextProps.initialTags === prevState.initialTags &&
-      nextProps.initialText === prevState.initialText
-    ) {
+    if (nextProps.initialTags === prevState.initialTags && nextProps.initialText === prevState.initialText) {
       return null;
     }
     return {
       tags: nextProps.initialTags,
-      text: nextProps.initialText
+      text: nextProps.initialText,
     };
   }
 
   componentWillReceiveProps(props) {
-    const { initialTags = [], initialText = " " } = props;
+    const { initialTags = [], initialText = ' ' } = props;
 
     this.setState({
       tags: initialTags,
-      text: initialText
+      text: initialText,
     });
   }
 
@@ -45,22 +43,17 @@ class Tags extends React.Component {
       this.setState(
         {
           tags: this.state.tags.slice(0, -1),
-          text: this.state.tags.slice(-1)[0] || " "
+          text: this.state.tags.slice(-1)[0] || ' ',
         },
-        () =>
-          this.props.onChangeTags && this.props.onChangeTags(this.state.tags)
+        () => this.props.onChangeTags && this.props.onChangeTags(this.state.tags),
       );
-    } else if (
-      text.length > 1 &&
-      (text.slice(-1) === " " || text.slice(-1) === ",")
-    ) {
+    } else if (text.length > 1 && (text.slice(-1) === ' ' || text.slice(-1) === ',')) {
       this.setState(
         {
           tags: [...this.state.tags, text.slice(0, -1).trim()],
-          text: " "
+          text: ' ',
         },
-        () =>
-          this.props.onChangeTags && this.props.onChangeTags(this.state.tags)
+        () => this.props.onChangeTags && this.props.onChangeTags(this.state.tags),
       );
     } else {
       this.setState({ text });
@@ -69,9 +62,7 @@ class Tags extends React.Component {
 
   render() {
     return (
-      <View
-        style={[styles.container, this.props.containerStyle, this.props.style]}
-      >
+      <View style={[styles.container, this.props.containerStyle, this.props.style]}>
         {this.state.tags.map((tag, i) => (
           <Tag
             key={i}
@@ -83,7 +74,7 @@ class Tags extends React.Component {
         ))}
         {!this.props.readonly && (
           <View style={[styles.textInputContainer]}>
-            <TextInput
+            <TextField
               value={this.state.text}
               style={[styles.textInput, this.props.inputStyle]}
               onChangeText={this.onChangeText}
@@ -98,8 +89,8 @@ class Tags extends React.Component {
 
 Tags.defaultProps = {
   initialTags: [],
-  initialText: " ",
-  readonly: false
+  initialText: ' ',
+  readonly: false,
 };
 
 Tags.propTypes = {
@@ -112,7 +103,8 @@ Tags.propTypes = {
   inputStyle: PropTypes.object,
   tagContainerStyle: PropTypes.object,
   tagTextStyle: PropTypes.object,
-  readonly: PropTypes.bool
+  multiline: PropTypes.bool,
+  readonly: PropTypes.bool,
 };
 
 export { Tag };

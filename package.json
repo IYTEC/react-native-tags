@@ -31,5 +31,8 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "dependencies": {
+    "react-native-material-textfield": "^0.12.0"
   }
 }
