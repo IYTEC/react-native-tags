@@ -21,17 +21,17 @@ yarn add react-native-tags
 ## Usage
 
 ```javascript
-import React from "react";
-import Tags from "react-native-tags";
+import React from 'react';
+import Tags from 'react-native-tags';
 
 const UselessComponent = () => (
   <Tags
     initialText="monkey"
-    initialTags={["dog", "cat", "chicken"]}
+    initialTags={['dog', 'cat', 'chicken']}
     onChangeTags={tags => console.log(tags)}
     onTagPress={(index, tagLabel, event) => console.log(index, tagLabel, event)}
-    containerStyle={{ justifyContent: "center" }}
-    inputStyle={{ backgroundColor: "white" }}
+    containerStyle={{ justifyContent: 'center' }}
+    inputStyle={{ backgroundColor: 'white' }}
   />
 );
 ```
@@ -50,3 +50,4 @@ const UselessComponent = () => (
 | inputStyle        | Style                                |
 | tagContainerStyle | Style                                |
 | tagTextStyle      | Style                                |
+| multiline         | Text field multiline (Boolean false) |
